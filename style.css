@@ -82,6 +82,111 @@ main {
   border-radius: 50rem;
   box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
 }
+.cardfield--dealer1 {
+  position: absolute;
+  left: 30%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield--dealer2 {
+  position: absolute;
+  left: 33%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield--dealer3 {
+  position: absolute;
+  left: 36%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield--dealer4 {
+  position: absolute;
+  left: 39%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield--dealer5 {
+  position: absolute;
+  left: 42%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield--dealer6 {
+  position: absolute;
+  left: 45%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield--dealer7 {
+  position: absolute;
+  left: 48%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield--dealer8 {
+  position: absolute;
+  left: 51%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield--player1 {
+  position: absolute;
+  left: 30%;
+  top: 60%;
+  width: 10%;
+}
+
+.cardfield--player2 {
+  position: absolute;
+  left: 33%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield--player3 {
+  position: absolute;
+  left: 36%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield--player4 {
+  position: absolute;
+  left: 39%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield--player5 {
+  position: absolute;
+  left: 42%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield--player6 {
+  position: absolute;
+  left: 45%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield--player7 {
+  position: absolute;
+  left: 48%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield--player8 {
+  position: absolute;
+  left: 51%;
+  top: 60%;
+  width: 10%;
+}
 
 .btn:active {
   transform: translate(-50%, 3px);

@@ -16,6 +16,17 @@ const startGame = document.querySelector(".btn--start");
 // Initialbedingungen
 let bank = 1000;
 let bet = 0;
+const dealer = {
+  ID: 0,
+  Score: 0,
+  Hand: undefined,
+};
+const player = {
+  ID: 1,
+  Score: 0,
+  Hand: undefined,
+};
+console.log(player);
 
 const openNewGame = function () {
   bank = 1000;
@@ -28,6 +39,16 @@ const openNewGame = function () {
   }
   newGame.classList.remove("hidden");
   overlay.classList.remove("hidden");
+  dealer = {
+    ID: 0,
+    Score: 0,
+    Hand: undefined,
+  };
+  player = {
+    ID: 1,
+    Score: 0,
+    Hand: undefined,
+  };
 };
 
 const closeNewGame = function () {
