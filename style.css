@@ -116,9 +116,18 @@ main {
   left: 85%;
   font-size: 3rem;
 }
+.btn--verdoppeln {
+  top: 40rem;
+  left: 51%;
+  font-size: 1.5rem;
+}
 
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+.btn--start {
+  bottom: 50%;
 }
 
 .disabled {
@@ -142,6 +151,13 @@ main {
 .bank--align {
   position: absolute;
   left: 87%;
+  top: 3.4%;
+  font-size: 2rem;
+}
+
+.bank--text {
+  position: absolute;
+  left: 83.5%;
   top: 3.4%;
   font-size: 2rem;
 }
@@ -177,13 +193,18 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
+  width: 80%;
+  height: 70%;
+
+  display: grid;
+  align-content: space-between;
 
   background-color: #d6d6d6;
   padding: 6rem;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(38, 194, 18, 0.3);
   z-index: 10;
+  text-align: center;
 }
 
 .close--newgame {
@@ -195,4 +216,42 @@ main {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+.btn--bet {
+  max-width: 5%;
+  color: #444;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.2s;
+
+  background-color: rgb(255, 255, 255);
+  padding: 0.7rem 0.7rem;
+  border-radius: 50%;
+  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+}
+.einsatz {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+  font-size: 4rem;
+  text-align: center;
+}
+
+.einsatz--text {
+  position: absolute;
+  left: 40.5%;
+  top: 43%;
+  font-size: 4rem;
+  text-align: center;
+}
+
+.btn--bet:active {
+  transform: translate(-10%, 3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
