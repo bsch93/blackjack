@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>BlackJack</title>
+  </head>
+  <body>
+    <main>
+      <section class="player dealer--0 player--active">
+        <h1 class="bank--align" id="bank--value">Bank: 1000€</h1>
+        <h2 class="dealer--align" id="name--dealer">Dealer</h2>
+        <p class="score--dealer" id="score--dealer">0</p>
+      </section>
+      <section class="player player--0">
+        <h2 class="player--align" id="name-player">Spieler</h2>
+        <p class="score--player" id="score--player">0</p>
+      </section>
+      <button class="btn btn--newgame">Neues Spiel ♠</button>
+      <div class="newgame hidden">
+        <button class="close--newgame">&times;</button>
+        <h1>I'm a modal window 😍</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+      <div class="overlay--newgame hidden"></div>
+      <button class="btn btn--ziehen">Ziehen</button>
+      <button class="btn btn--teilen disabled">Teilen</button>
+      <button class="btn btn--halten">Halten</button>
+      <button class="btn btn--aufgeben">Aufgeben</button>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

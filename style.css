@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  height: 100vh;
+  color: #333;
+  /*background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);*/
+  background-image: url("bg2.png");
+  background-repeat: repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* layout */
+
+main {
+  position: relative;
+  width: 150rem;
+  height: 80rem;
+  background-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(200px);
+  filter: blur();
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.player {
+  flex: 50%;
+  padding: 9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.75s;
+}
+/*.game--start {
+  width: 300px;
+  border: 15px solid green;
+  padding: 50px;
+  margin: 20px;
+  display: flex;
+  flex: auto;
+  background-color: rgba(255, 255, 255, 0.4)
+}*/
+
+.player--active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #444;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.2s;
+
+  background-color: white;
+  backdrop-filter: blur(10px);
+
+  padding: 0.7rem 2.5rem;
+  border-radius: 50rem;
+  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translate(-50%, 3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.btn--newgame {
+  top: 2rem;
+  opacity: 0.8;
+}
+
+.btn--halten {
+  top: 37.2rem;
+  left: 85%;
+  font-size: 3rem;
+}
+
+.btn--ziehen {
+  top: 37.2rem;
+  left: 15%;
+  font-size: 3rem;
+}
+
+.btn--teilen {
+  top: 30rem;
+  left: 15%;
+  font-size: 3rem;
+}
+
+.btn--aufgeben {
+  top: 44.4rem;
+  left: 85%;
+  font-size: 3rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dealer--align {
+  position: absolute;
+  left: 10%;
+  bottom: 85%;
+  font-size: 4rem;
+}
+.score--dealer {
+  position: absolute;
+  left: 13.4%;
+  bottom: 81%;
+  font-size: 3rem;
+}
+
+.bank--align {
+  position: absolute;
+  left: 87%;
+  top: 3.4%;
+  font-size: 2rem;
+}
+
+.player--align {
+  position: absolute;
+  left: 80%;
+  top: 80%;
+  font-size: 4rem;
+}
+
+.score--player {
+  position: absolute;
+  margin-left: auto;
+  left: 83.6%;
+  top: 76%;
+  font-size: 3rem;
+}
+
+.overlay--newgame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
+
+.newgame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+
+  background-color: #d6d6d6;
+  padding: 6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(38, 194, 18, 0.3);
+  z-index: 10;
+}
+
+.close--newgame {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 5rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
