@@ -1,6 +1,8 @@
 "use strict";
 const bankEle = document.querySelector(".bank-value");
 const betEle = document.querySelector(".bet-value");
+const dealerEle = document.querySelector(".score-dealer");
+const playerEle = document.querySelector(".score-player");
 const btnNewGame = document.querySelector(".btn-newgame");
 const btnStartGame = document.querySelector(".btn-startgame");
 const btnsGame = document.querySelectorAll(".btn-game");
@@ -11,7 +13,14 @@ const btnBet25 = document.querySelector(".bet-25");
 const btnBet50 = document.querySelector(".bet-50");
 const btnBet100 = document.querySelector(".bet-100");
 const btnBet500 = document.querySelector(".bet-500");
-let cardsEle = document.getElementsByTagName("img");
+const btnDraw = document.querySelector(".btn-draw");
+const btnHold = document.querySelector(".btn-hold");
+const btnSurrender = document.querySelector(".btn-surrender");
+const btnDouble = document.querySelector(".btn-double");
+// prettier-ignore
+let cardsDealer = document.getElementById("cards-dealer").querySelectorAll("img");
+// prettier-ignore
+let cardsPlayer = document.getElementById("cards-player").querySelectorAll("img");
 
 // Erstellt das Deck aus 52 Karten
 
@@ -52,17 +61,31 @@ function shuffle(deck) {
 //console.log(shuffle(deck));
 
 // Initialbedingungen
+deck = shuffle(deck);
 let bank = 1000;
 let bet = 0;
 let dealer = {
   ID: 0,
   Score: 0,
-  Hand: undefined,
+  Hand: [],
 };
 let player = {
   ID: 1,
   Score: 0,
-  Hand: undefined,
+  Hand: [],
+};
+
+const resetPlayers = function () {
+  dealer = {
+    ID: 0,
+    Score: 0,
+    Hand: [],
+  };
+  player = {
+    ID: 1,
+    Score: 0,
+    Hand: [],
+  };
 };
 
 // button toggles
@@ -82,12 +105,19 @@ const toggleBtnsGame = function (toggle) {
 const newGame = function () {
   bank = 1000;
   bet = 0;
+  deck = createDeck();
+  deck = shuffle(deck);
   bankEle.textContent = bank;
   betEle.textContent = bet;
   btnStartGame.classList.remove("hidden");
   toggleBtnsBet("remove");
   toggleBtnsGame("add");
-  for (let el of cardsEle) {
+  resetPlayers();
+  console.log(player);
+  for (let el of cardsDealer) {
+    el.src = "";
+  }
+  for (let el of cardsPlayer) {
     el.src = "";
   }
 };
@@ -101,14 +131,63 @@ const addBet = function (betted) {
   }
 };
 
+const displayCards = function () {
+  for (let i = 0; i < dealer.Hand.length; i++) {
+    if (dealer.Hand.length == 2 && i == 0) {
+      cardsDealer[i].src = `/Karten/Kartenrücken.png`;
+    } else {
+      cardsDealer[i].src = `/Karten/${dealer.Hand[i].img}`;
+    }
+  }
+  for (let i = 0; i < player.Hand.length; i++) {
+    cardsPlayer[i].src = `/Karten/${player.Hand[i].img}`;
+  }
+};
+
+const dealHands = function () {
+  for (let i = 0; i < 2; i++) {
+    let card = deck.pop();
+    dealer.Hand.push(card);
+    card = deck.pop();
+    player.Hand.push(card);
+    displayCards();
+  }
+};
+
+const dealCard = function (id) {
+  let card = deck.pop();
+  id.Hand.push(card);
+  displayCards();
+};
+
+const addScores = function () {
+  let dealerTotal = dealer.Hand.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.Value;
+  }, 0);
+  if (dealer.Hand.length < 3) dealerTotal -= dealer.Hand[0].Value;
+  dealerEle.textContent = dealerTotal;
+
+  let playerTotal = player.Hand.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.Value;
+  }, 0);
+  playerEle.textContent = playerTotal;
+};
+
 const startGame = function () {
   if (bet > 0) {
     toggleBtnsBet("add");
     toggleBtnsGame("remove");
     btnStartGame.classList.add("hidden");
+    dealHands();
+    displayCards();
+    addScores();
+    console.log(player);
   }
 };
 
+//dealHands();
+
+//displayCards();
 //const subtractBet = function (bankSubtract) {
 //if (bank >= bankSubtract) {
 //bank -= bankSubtract;
@@ -136,3 +215,5 @@ btnBet100.addEventListener("click", function () {
 btnBet500.addEventListener("click", function () {
   addBet(500);
 });
+
+dealCard(dealer);
