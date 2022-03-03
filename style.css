@@ -317,7 +317,16 @@ main {
   font-size: 3rem;
 }
 
-.overlay-newgame {
+.hidden {
+  display: none !important;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/*.overlay-newgame {
   position: absolute;
   top: 0;
   left: 0;
@@ -356,13 +365,4 @@ main {
   cursor: pointer;
   border: none;
   background: none;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+} */

@@ -1,103 +1,17 @@
 "use strict";
-const bankEle = document.getElementsByClassName("bank-value");
-const betEle = document.getElementsByClassName("bet-value");
-const newGame = document.querySelector(".newgame");
-const overlay = document.querySelector(".overlay-newgame");
+const bankEle = document.querySelector(".bank-value");
+const betEle = document.querySelector(".bet-value");
 const btnNewGame = document.querySelector(".btn-newgame");
-const btnCloseNewGame = document.querySelector(".close-newgame");
+const btnStartGame = document.querySelector(".btn-startgame");
+const btnsGame = document.querySelectorAll(".btn-game");
+const btnsBet = document.querySelectorAll(".btn-bet");
 const btnBet1 = document.querySelector(".bet-1");
 const btnBet5 = document.querySelector(".bet-5");
 const btnBet25 = document.querySelector(".bet-25");
 const btnBet50 = document.querySelector(".bet-50");
 const btnBet100 = document.querySelector(".bet-100");
 const btnBet500 = document.querySelector(".bet-500");
-const startGame = document.querySelector(".btn-start");
-
-// Initialbedingungen
-let bank = 1000;
-let bet = 0;
-let dealer = {
-  ID: 0,
-  Score: 0,
-  Hand: undefined,
-};
-let player = {
-  ID: 1,
-  Score: 0,
-  Hand: undefined,
-};
-console.log(player);
-
-const openNewGame = function () {
-  bank = 1000;
-  bet = 0;
-  for (let el of betEle) {
-    el.textContent = bet;
-  }
-  for (let el of bankEle) {
-    el.textContent = bank;
-  }
-  newGame.classList.remove("hidden");
-  overlay.classList.remove("hidden");
-  dealer = {
-    ID: 0,
-    Score: 0,
-    Hand: undefined,
-  };
-  player = {
-    ID: 1,
-    Score: 0,
-    Hand: undefined,
-  };
-};
-
-const closeNewGame = function () {
-  newGame.classList.add("hidden");
-  overlay.classList.add("hidden");
-};
-console.log(bet);
-const subtractBet = function (betSubtract) {
-  bank -= betSubtract;
-  for (let el of bankEle) {
-    el.textContent = bank;
-  }
-  console.log(bet);
-};
-const addBet = function (betAdd) {
-  bet += betAdd;
-  for (let el of betEle) {
-    el.textContent = bet;
-  }
-};
-
-btnNewGame.addEventListener("click", openNewGame);
-btnBet1.addEventListener("click", function () {
-  subtractBet(1);
-  addBet(1);
-});
-btnBet5.addEventListener("click", function () {
-  subtractBet(5);
-  addBet(5);
-});
-btnBet25.addEventListener("click", function () {
-  subtractBet(25);
-  addBet(25);
-});
-btnBet50.addEventListener("click", function () {
-  subtractBet(50);
-  addBet(50);
-});
-btnBet100.addEventListener("click", function () {
-  subtractBet(100);
-  addBet(100);
-});
-btnBet500.addEventListener("click", function () {
-  subtractBet(500);
-  addBet(500);
-});
-btnCloseNewGame.addEventListener("click", closeNewGame);
-overlay.addEventListener("click", closeNewGame);
-startGame.addEventListener("click", closeNewGame);
+let cardsEle = document.getElementsByTagName("img");
 
 // Erstellt das Deck aus 52 Karten
 
@@ -135,4 +49,90 @@ function shuffle(deck) {
   }
   return deck;
 }
-console.log(shuffle(deck));
+//console.log(shuffle(deck));
+
+// Initialbedingungen
+let bank = 1000;
+let bet = 0;
+let dealer = {
+  ID: 0,
+  Score: 0,
+  Hand: undefined,
+};
+let player = {
+  ID: 1,
+  Score: 0,
+  Hand: undefined,
+};
+
+// button toggles
+
+const toggleBtnsBet = function (toggle) {
+  for (let i = 0; i < btnsBet.length; ++i) {
+    btnsBet[i].classList[toggle]("hidden");
+  }
+};
+
+const toggleBtnsGame = function (toggle) {
+  for (let i = 0; i < btnsGame.length; ++i) {
+    btnsGame[i].classList[toggle]("hidden");
+  }
+};
+
+const newGame = function () {
+  bank = 1000;
+  bet = 0;
+  bankEle.textContent = bank;
+  betEle.textContent = bet;
+  btnStartGame.classList.remove("hidden");
+  toggleBtnsBet("remove");
+  toggleBtnsGame("add");
+  for (let el of cardsEle) {
+    el.src = "";
+  }
+};
+
+const addBet = function (betted) {
+  if (bank >= betted) {
+    bet += betted;
+    betEle.textContent = bet;
+    bank -= betted;
+    bankEle.textContent = bank;
+  }
+};
+
+const startGame = function () {
+  if (bet > 0) {
+    toggleBtnsBet("add");
+    toggleBtnsGame("remove");
+    btnStartGame.classList.add("hidden");
+  }
+};
+
+//const subtractBet = function (bankSubtract) {
+//if (bank >= bankSubtract) {
+//bank -= bankSubtract;
+//bankEle.textContent = bank;
+//}
+//};
+
+btnNewGame.addEventListener("click", newGame);
+btnStartGame.addEventListener("click", startGame);
+btnBet1.addEventListener("click", function () {
+  addBet(1);
+});
+btnBet5.addEventListener("click", function () {
+  addBet(5);
+});
+btnBet25.addEventListener("click", function () {
+  addBet(25);
+});
+btnBet50.addEventListener("click", function () {
+  addBet(50);
+});
+btnBet100.addEventListener("click", function () {
+  addBet(100);
+});
+btnBet500.addEventListener("click", function () {
+  addBet(500);
+});

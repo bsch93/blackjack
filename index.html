@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>BlackJack</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">  
   </head>
   <body>
     <main>
@@ -33,30 +34,13 @@
       <p class="score-dealer" id="score-dealer">0</p>
       <h2 class="player-text">Spieler</h2>
       <p class="score-player" id="score-player">0</p>
-      <section class="player dealer-0 player-active"></section>
-      <section class="player player-0"></section>
-      <div class="newgame hidden">
-        <button class="close-newgame">&times;</button>
-        <h1 class="newgame-bank-text">Bank</h1>
-        <h1 class="newgame-bank bank-value">1000</h1>
-        <h1 class="newgame-bet-text">Einsatz</h1>
-        <h1 class="newgame-bet bet-value">0</h1>
-        <button class="btn-bet bet-1">1</button>
-        <button class="btn-bet bet-5">5</button>
-        <button class="btn-bet bet-25">25</button>
-        <button class="btn-bet bet-50">50</button>
-        <button class="btn-bet bet-100">100</button>
-        <button class="btn-bet bet-500">500</button>
-        <button class="btn btn-start">Start</button>
-      </div>
-      <div class="overlay-newgame hidden"></div>
       <button class="btn btn-newgame">Neues Spiel ♠</button>
       <button class="btn btn-startgame">Spiel starten</button>
-      <button class="btn btn-double">Verdoppeln</button>
-      <button class="btn btn-draw">Ziehen</button>
-      <button class="btn btn-split disabled">Teilen</button>
-      <button class="btn btn-hold">Halten</button>
-      <button class="btn btn-surrender">Aufgeben</button>
+      <button class="btn btn-game btn-double hidden">Verdoppeln</button>
+      <button class="btn btn-game btn-draw hidden">Ziehen</button>
+      <button class="btn btn-game btn-split hidden disabled">Teilen</button>
+      <button class="btn btn-game btn-hold hidden">Halten</button>
+      <button class="btn btn-game btn-surrender hidden">Aufgeben</button>
       <button class="btn-bet bet-1">1</button>
       <button class="btn-bet bet-5">5</button>
       <button class="btn-bet bet-25">25</button>
@@ -67,3 +51,21 @@
     <script src="script.js"></script>
   </body>
 </html>
+
+<!--<div class="newgame hidden">
+  <button class="close-newgame">&times;</button>
+  <h1 class="newgame-bank-text">Bank</h1>
+  <h1 class="newgame-bank bank-value">1000</h1>
+  <h1 class="newgame-bet-text">Einsatz</h1>
+  <h1 class="newgame-bet bet-value">0</h1>
+  <button class="btn-bet bet-1">1</button>
+  <button class="btn-bet bet-5">5</button>
+  <button class="btn-bet bet-25">25</button>
+  <button class="btn-bet bet-50">50</button>
+  <button class="btn-bet bet-100">100</button>
+  <button class="btn-bet bet-500">500</button>
+  <button class="btn btn-start">Start</button>
+</div>
+<section class="player dealer-0 player-active"></section>
+      <section class="player player-0"></section>
+      <div class="overlay-newgame hidden"></div>
