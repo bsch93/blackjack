@@ -29,13 +29,11 @@ main {
   position: relative;
   width: 600px;
   height: 800px;
-  /*background-color: rgba(255, 255, 255, 0.35);*/
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0.596) 50%,
     rgba(255, 255, 255, 0.4) 50%
   );
-  backdrop-filter: blur(200px);
   filter: blur();
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
   border-radius: 9px;
