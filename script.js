@@ -143,13 +143,13 @@ const addBet = function (betted) {
 const displayCards = function () {
   for (let i = 0; i < dealer.Hand.length; i++) {
     if (dealer.Hand.length == 2 && i == 0) {
-      cardsDealer[i].src = `/Karten/Kartenrücken.png`;
+      cardsDealer[i].src = `./Karten/Kartenrücken.png`;
     } else {
-      cardsDealer[i].src = `/Karten/${dealer.Hand[i].img}`;
+      cardsDealer[i].src = `./Karten/${dealer.Hand[i].img}`;
     }
   }
   for (let i = 0; i < player.Hand.length; i++) {
-    cardsPlayer[i].src = `/Karten/${player.Hand[i].img}`;
+    cardsPlayer[i].src = `./Karten/${player.Hand[i].img}`;
   }
 };
 
