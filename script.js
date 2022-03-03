@@ -1,27 +1,27 @@
 "use strict";
-const bankEle = document.getElementsByClassName("bank--value");
-const betEle = document.getElementsByClassName("einsatz--value");
+const bankEle = document.getElementsByClassName("bank-value");
+const betEle = document.getElementsByClassName("bet-value");
 const newGame = document.querySelector(".newgame");
-const overlay = document.querySelector(".overlay--newgame");
-const btnNewGame = document.querySelector(".btn--newgame");
-const btnCloseNewGame = document.querySelector(".close--newgame");
-const btnBet1 = document.querySelector(".bet--1");
-const btnBet5 = document.querySelector(".bet--5");
-const btnBet25 = document.querySelector(".bet--25");
-const btnBet50 = document.querySelector(".bet--50");
-const btnBet100 = document.querySelector(".bet--100");
-const btnBet500 = document.querySelector(".bet--500");
-const startGame = document.querySelector(".btn--start");
+const overlay = document.querySelector(".overlay-newgame");
+const btnNewGame = document.querySelector(".btn-newgame");
+const btnCloseNewGame = document.querySelector(".close-newgame");
+const btnBet1 = document.querySelector(".bet-1");
+const btnBet5 = document.querySelector(".bet-5");
+const btnBet25 = document.querySelector(".bet-25");
+const btnBet50 = document.querySelector(".bet-50");
+const btnBet100 = document.querySelector(".bet-100");
+const btnBet500 = document.querySelector(".bet-500");
+const startGame = document.querySelector(".btn-start");
 
 // Initialbedingungen
 let bank = 1000;
 let bet = 0;
-const dealer = {
+let dealer = {
   ID: 0,
   Score: 0,
   Hand: undefined,
 };
-const player = {
+let player = {
   ID: 1,
   Score: 0,
   Hand: undefined,

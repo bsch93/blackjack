@@ -16,7 +16,6 @@ body {
   font-weight: 400;
   height: 100vh;
   color: #333;
-  /*background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);*/
   background-image: url("bg2.png");
   background-repeat: repeat;
   display: flex;
@@ -28,9 +27,14 @@ body {
 
 main {
   position: relative;
-  width: 150rem;
-  height: 80rem;
-  background-color: rgba(255, 255, 255, 0.35);
+  width: 600px;
+  height: 800px;
+  /*background-color: rgba(255, 255, 255, 0.35);*/
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.596) 50%,
+    rgba(255, 255, 255, 0.4) 50%
+  );
   backdrop-filter: blur(200px);
   filter: blur();
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
@@ -39,15 +43,15 @@ main {
   display: flex;
   flex-direction: column;
 }
-.player {
+/*.player {
   flex: 50%;
   padding: 9rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: all 0.75s;
-}
-/*.game--start {
+}*/
+/*.game-start {
   width: 300px;
   border: 15px solid green;
   padding: 50px;
@@ -57,19 +61,18 @@ main {
   background-color: rgba(255, 255, 255, 0.4)
 }*/
 
-.player--active {
+/*.player-active {
   background-color: rgba(255, 255, 255, 0.4);
-}
+}*/
 
 .btn {
   position: absolute;
-  left: 50%;
   transform: translateX(-50%);
   color: #444;
   background: none;
   border: none;
   font-family: inherit;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   cursor: pointer;
   font-weight: 400;
@@ -78,114 +81,9 @@ main {
   background-color: white;
   backdrop-filter: blur(10px);
 
-  padding: 0.7rem 2.5rem;
+  padding: 0.7rem 0.7rem;
   border-radius: 50rem;
   box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
-}
-.cardfield--dealer1 {
-  position: absolute;
-  left: 30%;
-  top: 10%;
-  width: 10%;
-}
-
-.cardfield--dealer2 {
-  position: absolute;
-  left: 33%;
-  top: 10%;
-  width: 10%;
-}
-
-.cardfield--dealer3 {
-  position: absolute;
-  left: 36%;
-  top: 10%;
-  width: 10%;
-}
-
-.cardfield--dealer4 {
-  position: absolute;
-  left: 39%;
-  top: 10%;
-  width: 10%;
-}
-
-.cardfield--dealer5 {
-  position: absolute;
-  left: 42%;
-  top: 10%;
-  width: 10%;
-}
-
-.cardfield--dealer6 {
-  position: absolute;
-  left: 45%;
-  top: 10%;
-  width: 10%;
-}
-
-.cardfield--dealer7 {
-  position: absolute;
-  left: 48%;
-  top: 10%;
-  width: 10%;
-}
-
-.cardfield--dealer8 {
-  position: absolute;
-  left: 51%;
-  top: 10%;
-  width: 10%;
-}
-
-.cardfield--player1 {
-  position: absolute;
-  left: 30%;
-  top: 60%;
-  width: 10%;
-}
-
-.cardfield--player2 {
-  position: absolute;
-  left: 33%;
-  top: 60%;
-  width: 10%;
-}
-.cardfield--player3 {
-  position: absolute;
-  left: 36%;
-  top: 60%;
-  width: 10%;
-}
-.cardfield--player4 {
-  position: absolute;
-  left: 39%;
-  top: 60%;
-  width: 10%;
-}
-.cardfield--player5 {
-  position: absolute;
-  left: 42%;
-  top: 60%;
-  width: 10%;
-}
-.cardfield--player6 {
-  position: absolute;
-  left: 45%;
-  top: 60%;
-  width: 10%;
-}
-.cardfield--player7 {
-  position: absolute;
-  left: 48%;
-  top: 60%;
-  width: 10%;
-}
-.cardfield--player8 {
-  position: absolute;
-  left: 51%;
-  top: 60%;
-  width: 10%;
 }
 
 .btn:active {
@@ -193,96 +91,233 @@ main {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 }
 
-.btn--newgame {
-  top: 2rem;
-  opacity: 0.8;
+.btn-newgame {
+  top: 2%;
+  left: 50%;
 }
 
-.btn--halten {
-  top: 37.2rem;
-  left: 85%;
-  font-size: 3rem;
+.btn-startgame {
+  top: 7%;
+  left: 50%;
 }
 
-.btn--ziehen {
-  top: 37.2rem;
-  left: 15%;
-  font-size: 3rem;
+.btn-hold {
+  top: 47.5%;
+  left: 10%;
 }
 
-.btn--teilen {
-  top: 30rem;
-  left: 15%;
-  font-size: 3rem;
+.btn-draw {
+  top: 42.5%;
+  left: 10%;
 }
 
-.btn--aufgeben {
-  top: 44.4rem;
-  left: 85%;
-  font-size: 3rem;
+.btn-split {
+  top: 37.5%;
+  left: 10%;
 }
-.btn--verdoppeln {
-  top: 40rem;
-  left: 51%;
+
+.btn-surrender {
+  top: 52.5%;
+  left: 10%;
+}
+.btn-double {
+  top: 50%;
+  left: 50%;
   font-size: 1.5rem;
 }
 
-.hidden {
-  display: none !important;
+.btn-bet {
+  position: relative;
+  top: 37%;
+  left: 90%;
+  max-width: 7%;
+  color: #444;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.2s;
+
+  background-color: rgb(255, 255, 255);
+  padding: 0.7rem 0.7rem;
+  border-radius: 50%;
+  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
 }
 
-.btn--start {
+.btn-bet:active {
+  transform: translate(-10%, 3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.cardfield-dealer1 {
+  position: absolute;
+  left: 30%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield-dealer2 {
+  position: absolute;
+  left: 33%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield-dealer3 {
+  position: absolute;
+  left: 36%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield-dealer4 {
+  position: absolute;
+  left: 39%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield-dealer5 {
+  position: absolute;
+  left: 42%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield-dealer6 {
+  position: absolute;
+  left: 45%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield-dealer7 {
+  position: absolute;
+  left: 48%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield-dealer8 {
+  position: absolute;
+  left: 51%;
+  top: 10%;
+  width: 10%;
+}
+
+.cardfield-player1 {
+  position: absolute;
+  left: 30%;
+  top: 60%;
+  width: 10%;
+}
+
+.cardfield-player2 {
+  position: absolute;
+  left: 33%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield-player3 {
+  position: absolute;
+  left: 36%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield-player4 {
+  position: absolute;
+  left: 39%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield-player5 {
+  position: absolute;
+  left: 42%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield-player6 {
+  position: absolute;
+  left: 45%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield-player7 {
+  position: absolute;
+  left: 48%;
+  top: 60%;
+  width: 10%;
+}
+.cardfield-player8 {
+  position: absolute;
+  left: 51%;
+  top: 60%;
+  width: 10%;
+}
+
+.btn-start {
   bottom: 50%;
 }
 
-.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.dealer--align {
+.dealer-text {
   position: absolute;
-  left: 10%;
-  bottom: 85%;
-  font-size: 4rem;
+  left: 5%;
+  top: 2%;
+  font-size: 3rem;
 }
-.score--dealer {
+.score-dealer {
   position: absolute;
-  left: 13.4%;
-  bottom: 81%;
+  left: 11%;
+  top: 6%;
   font-size: 3rem;
 }
 
-.bank--align {
+.bank-text {
   position: absolute;
-  left: 87%;
-  top: 3.4%;
+  left: 88%;
+  top: 1.8%;
   font-size: 2rem;
 }
 
-.bank--text {
+.bank-value {
   position: absolute;
-  left: 83.5%;
-  top: 3.4%;
+  left: 88%;
+  top: 4.2%;
   font-size: 2rem;
 }
 
-.player--align {
+.player-text {
   position: absolute;
   left: 80%;
-  top: 80%;
-  font-size: 4rem;
-}
-
-.score--player {
-  position: absolute;
-  margin-left: auto;
-  left: 83.6%;
-  top: 76%;
+  top: 92%;
   font-size: 3rem;
 }
 
-.overlay--newgame {
+.score-player {
+  position: absolute;
+  left: 85.5%;
+  top: 88%;
+  font-size: 3rem;
+}
+
+.bet-text {
+  position: absolute;
+  left: 41.5%;
+  top: 41%;
+  font-size: 3rem;
+}
+
+.bet-value {
+  position: absolute;
+  left: 48%;
+  top: 45%;
+  font-size: 3rem;
+}
+
+.overlay-newgame {
   position: absolute;
   top: 0;
   left: 0;
@@ -312,7 +347,7 @@ main {
   text-align: center;
 }
 
-.close--newgame {
+.close-newgame {
   position: absolute;
   top: 1.2rem;
   right: 2rem;
@@ -323,40 +358,11 @@ main {
   background: none;
 }
 
-.btn--bet {
-  max-width: 5%;
-  color: #444;
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: 400;
-  transition: all 0.2s;
-
-  background-color: rgb(255, 255, 255);
-  padding: 0.7rem 0.7rem;
-  border-radius: 50%;
-  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
-}
-.einsatz {
-  position: absolute;
-  left: 50%;
-  top: 43%;
-  font-size: 4rem;
-  text-align: center;
+.hidden {
+  display: none !important;
 }
 
-.einsatz--text {
-  position: absolute;
-  left: 40.5%;
-  top: 43%;
-  font-size: 4rem;
-  text-align: center;
-}
-
-.btn--bet:active {
-  transform: translate(-10%, 3px);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
