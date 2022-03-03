@@ -26,8 +26,8 @@ let cardsPlayer = document.getElementById("cards-player").querySelectorAll("img"
 
 const farbe = ["Kreuz", "Pik", "Herz", "Karo"];
 // prettier-ignore
-const nummer = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "D", "K"];
-const cardValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
+const nummer = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "D", "K", "A"];
+const cardValue = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11];
 function createDeck() {
   let deck = new Array();
   for (let i = 0; i < farbe.length; i++) {
@@ -113,12 +113,21 @@ const newGame = function () {
   toggleBtnsBet("remove");
   toggleBtnsGame("add");
   resetPlayers();
-  console.log(player);
   for (let el of cardsDealer) {
     el.src = "";
   }
   for (let el of cardsPlayer) {
     el.src = "";
+  }
+  dealerEle.textContent = 0;
+  playerEle.textContent = 0;
+};
+
+const checkWinner = function () {
+  if (playerEle.textContent == 21) {
+    console.log("Player won!");
+  } else if (dealerEle.textContent == 21) {
+    console.log("Dealer won!");
   }
 };
 
@@ -181,7 +190,7 @@ const startGame = function () {
     dealHands();
     displayCards();
     addScores();
-    console.log(player);
+    checkWinner();
   }
 };
 
@@ -197,6 +206,11 @@ const startGame = function () {
 
 btnNewGame.addEventListener("click", newGame);
 btnStartGame.addEventListener("click", startGame);
+btnDraw.addEventListener("click", () => {
+  dealCard(player);
+  addScores();
+  checkWinner();
+});
 btnBet1.addEventListener("click", function () {
   addBet(1);
 });
@@ -215,5 +229,3 @@ btnBet100.addEventListener("click", function () {
 btnBet500.addEventListener("click", function () {
   addBet(500);
 });
-
-dealCard(dealer);
