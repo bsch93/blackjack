@@ -126,7 +126,7 @@ const newGame = function () {
 const checkWinner = function () {
   if (playerEle.textContent == 21) {
     console.log("Player won!");
-  } else if (dealerEle.textContent == 21) {
+  } else if (dealerEle.textContent == 21 || playerEle.textContent > 21) {
     console.log("Dealer won!");
   }
 };
