@@ -17,6 +17,7 @@ const btnDraw = document.querySelector(".btn-draw");
 const btnHold = document.querySelector(".btn-hold");
 const btnSurrender = document.querySelector(".btn-surrender");
 const btnDouble = document.querySelector(".btn-double");
+let winner = "";
 // prettier-ignore
 let cardsDealer = document.getElementById("cards-dealer").querySelectorAll("img");
 // prettier-ignore
@@ -58,7 +59,6 @@ function shuffle(deck) {
   }
   return deck;
 }
-//console.log(shuffle(deck));
 
 // Initialbedingungen
 deck = shuffle(deck);
@@ -86,6 +86,8 @@ const resetPlayers = function () {
     Score: 0,
     Hand: [],
   };
+  dealerEle.textContent = 0;
+  playerEle.textContent = 0;
 };
 
 // button toggles
@@ -119,15 +121,19 @@ const newGame = function () {
   for (let el of cardsPlayer) {
     el.src = "";
   }
-  dealerEle.textContent = 0;
-  playerEle.textContent = 0;
+  winner = false;
 };
 
 const checkWinner = function () {
-  if (playerEle.textContent == 21) {
+  if (playerEle.textContent == 21 || dealerEle.textContent > 21) {
     console.log("Player won!");
+    winner = true;
   } else if (dealerEle.textContent == 21 || playerEle.textContent > 21) {
     console.log("Dealer won!");
+    winner = true;
+  }
+  if (winner) {
+    toggleBtnsGame("add");
   }
 };
 
@@ -169,7 +175,7 @@ const dealCard = function (id) {
   displayCards();
 };
 
-const addScores = function () {
+const addScoresInit = function () {
   let dealerTotal = dealer.Hand.reduce((previousValue, currentValue) => {
     return previousValue + currentValue.Value;
   }, 0);
@@ -182,6 +188,30 @@ const addScores = function () {
   playerEle.textContent = playerTotal;
 };
 
+const addScores = function () {
+  let dealerTotal = dealer.Hand.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.Value;
+  }, 0);
+  dealerEle.textContent = dealerTotal;
+
+  let playerTotal = player.Hand.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.Value;
+  }, 0);
+  playerEle.textContent = playerTotal;
+};
+
+const compareScores = function () {
+  let tempDealer = 21 - dealerEle.textContent;
+  let tempPlayer = 21 - playerEle.textContent;
+  if (tempDealer < tempPlayer) {
+    console.log("Dealer wins!");
+  } else if (tempPlayer < tempDealer) {
+    console.log("Player wins!");
+  } else console.log("Draw!");
+};
+
+const turnCard = function () {};
+
 const startGame = function () {
   if (bet > 0) {
     toggleBtnsBet("add");
@@ -189,7 +219,7 @@ const startGame = function () {
     btnStartGame.classList.add("hidden");
     dealHands();
     displayCards();
-    addScores();
+    addScoresInit();
     checkWinner();
   }
 };
@@ -208,8 +238,30 @@ btnNewGame.addEventListener("click", newGame);
 btnStartGame.addEventListener("click", startGame);
 btnDraw.addEventListener("click", () => {
   dealCard(player);
+  addScoresInit();
+  checkWinner();
+});
+btnHold.addEventListener("click", () => {
+  addScores();
+  if (dealerEle.textContent > 18) {
+    compareScores();
+  } else {
+    dealCard(dealer);
+    addScores();
+    checkWinner();
+  }
+});
+btnDouble.addEventListener("click", () => {
+  bankEle.textContent = bankEle.textContent - betEle.textContent;
+  betEle.textContent = betEle.textContent * 2;
+  btnDouble.classList.add("hidden");
   addScores();
   checkWinner();
+  if (!winner) {
+    dealCard(player);
+    addScores();
+    checkWinner();
+  }
 });
 btnBet1.addEventListener("click", function () {
   addBet(1);
