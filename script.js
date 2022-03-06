@@ -1,4 +1,5 @@
 "use strict";
+// DOM
 const bankEle = document.querySelector(".bank-value");
 const betEle = document.querySelector(".bet-value");
 const dealerEle = document.querySelector(".score-dealer");
@@ -17,7 +18,9 @@ const btnDraw = document.querySelector(".btn-draw");
 const btnHold = document.querySelector(".btn-hold");
 const btnSurrender = document.querySelector(".btn-surrender");
 const btnDouble = document.querySelector(".btn-double");
-let winner = "";
+const winOrLoseModal = document.querySelector(".winorlose");
+const winOrLoseEle = document.querySelector(".winorloseele");
+const btnWinOrLose = document.querySelector(".btnwinorlose");
 // prettier-ignore
 let cardsDealer = document.getElementById("cards-dealer").querySelectorAll("img");
 // prettier-ignore
@@ -61,6 +64,8 @@ function shuffle(deck) {
 }
 
 // Initialbedingungen
+let winner = "";
+let winnerID = "";
 deck = shuffle(deck);
 let bank = 1000;
 let bet = 0;
@@ -75,6 +80,8 @@ let player = {
   Hand: [],
 };
 
+// funktionen
+
 const resetPlayers = function () {
   dealer = {
     ID: 0,
@@ -88,6 +95,8 @@ const resetPlayers = function () {
   };
   dealerEle.textContent = 0;
   playerEle.textContent = 0;
+  winner = false;
+  winnerID = "";
 };
 
 // button toggles
@@ -121,19 +130,22 @@ const newGame = function () {
   for (let el of cardsPlayer) {
     el.src = "";
   }
-  winner = false;
 };
 
 const checkWinner = function () {
   if (playerEle.textContent == 21 || dealerEle.textContent > 21) {
     console.log("Player won!");
     winner = true;
+    winnerID = "Spieler";
   } else if (dealerEle.textContent == 21 || playerEle.textContent > 21) {
     console.log("Dealer won!");
     winner = true;
+    winnerID = "Dealer";
   }
   if (winner) {
     toggleBtnsGame("add");
+    winOrLoseModal.classList.remove("hidden");
+    winOrLoseEle.textContent = `${winnerID} gewinnt!`;
   }
 };
 
@@ -210,6 +222,13 @@ const compareScores = function () {
   } else console.log("Draw!");
 };
 
+const emptyField = function () {
+  for (let i = 0; i < 9; i++) {
+    cardsDealer[i].src = "";
+    cardsPlayer[i].src = "";
+  }
+};
+
 const turnCard = function () {};
 
 const startGame = function () {
@@ -224,6 +243,19 @@ const startGame = function () {
   }
 };
 
+const continueGame = function () {
+  if (winnerID === "Spieler")
+    bankEle.textContent =
+      Number(bankEle.textContent) + Number(betEle.textContent) * 2;
+  winOrLoseModal.classList.add("hidden");
+  btnStartGame.classList.remove("hidden");
+  toggleBtnsBet("remove");
+  bet = 0;
+  betEle.textContent = bet;
+  resetPlayers();
+  emptyField();
+};
+
 //dealHands();
 
 //displayCards();
@@ -233,6 +265,8 @@ const startGame = function () {
 //bankEle.textContent = bank;
 //}
 //};
+
+// buttons
 
 btnNewGame.addEventListener("click", newGame);
 btnStartGame.addEventListener("click", startGame);
@@ -244,6 +278,7 @@ btnDraw.addEventListener("click", () => {
 btnHold.addEventListener("click", () => {
   addScores();
   if (dealerEle.textContent > 18) {
+    //turnOverCards
     compareScores();
   } else {
     dealCard(dealer);
@@ -281,3 +316,4 @@ btnBet100.addEventListener("click", function () {
 btnBet500.addEventListener("click", function () {
   addBet(500);
 });
+btnWinOrLose.addEventListener("click", continueGame);
