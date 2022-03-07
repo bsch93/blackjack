@@ -177,9 +177,30 @@ const checkWinnerDouble = function () {
   }
 };
 
-const dealerTurnDouble = function () {
+const dealerTurnAuto = function () {
+  turnCard();
   addScores();
-  //if (dealerEle.textContent !== 21 || playerEle.textContent !> 21)
+  if (playerEle.textContent > 21 || dealerEle.textContent == 21) {
+    console.log("if condition 1");
+    winner = true;
+    winnerID = "Dealer";
+    checkWinner();
+  }
+  console.log(winner);
+  console.log(dealerEle);
+  if (winner == false && dealerEle.textContent <= 16) {
+    console.log("if condition 2");
+    for (let i = 0; i < 8; i++) {
+      if (!winner) {
+        dealCard(dealer);
+        addScores();
+        checkWinner();
+      }
+    }
+  } else if (!winner) {
+    compareScores();
+    console.log("else condition");
+  }
 };
 
 const addBet = function (betted) {
@@ -274,10 +295,21 @@ const compareScores = function () {
   let tempDealer = 21 - dealerEle.textContent;
   let tempPlayer = 21 - playerEle.textContent;
   if (tempDealer < tempPlayer) {
-    console.log("Dealer wins!");
+    winner = true;
+    winnerID = "Dealer";
   } else if (tempPlayer < tempDealer) {
-    console.log("Player wins!");
-  } else console.log("Draw!");
+    winner = true;
+    winnerID = "Spieler";
+  } else if (tempPlayer == tempDealer) {
+    winner = true;
+    winnerID = "Draw";
+  }
+  if (winner) {
+    toggleBtnsGame("add");
+    turnCard();
+    winOrLoseModal.classList.remove("hidden");
+    winOrLoseEle.textContent = `${winnerID} gewinnt!`;
+  }
 };
 
 //const emptyField = function () {
@@ -324,6 +356,10 @@ const continueGame = function () {
   betEle.textContent = bet;
   resetPlayers();
   emptyField();
+  if (deck.length < 10) {
+    createDeck();
+    shuffle(deck);
+  }
 };
 
 //dealHands();
@@ -350,23 +386,14 @@ btnDraw.addEventListener("click", () => {
 btnHold.addEventListener("click", () => {
   addScores();
   btnDoubleDisable();
-  if (dealerEle.textContent > 18) {
-    turnCard();
-    compareScores();
-  } else {
-    dealCard(dealer);
-    addScores();
-    checkWinner();
-  }
+  dealerTurnAuto();
 });
 btnDouble.addEventListener("click", () => {
   bankEle.textContent = bankEle.textContent - betEle.textContent;
   betEle.textContent = betEle.textContent * 2;
   btnDouble.classList.add("hidden");
   dealCard(player);
-  addScores();
-  turnCard();
-  checkWinnerDouble();
+  dealerTurnAuto();
 });
 btnBet1.addEventListener("click", function () {
   addBet(1);
@@ -400,14 +427,11 @@ btnSplit.addEventListener("click", function () {
 });
 btnWinOrLose.addEventListener("click", continueGame);
 
-//cardsdelaer at 0 equals dealer hand at 0
-
-//if (!winner) {
-//dealCard(player);
-//addScoresInit();
-//checkWinner();
-//if (!winner) {
-//dealCard(player);
-//addScoresInit();
+//if (dealerEle.textContent >= 17) {
+//turnCard();
+//compareScores();
+//} else {
+//dealCard(dealer);
+//addScores();
 //checkWinner();
 //}
