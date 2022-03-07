@@ -113,6 +113,19 @@ const toggleBtnsGame = function (toggle) {
   }
 };
 
+const btnDoubleDisable = function () {
+  btnDouble.classList.add("hidden");
+};
+
+const emptyField = function () {
+  for (let el of cardsDealer) {
+    el.src = "";
+  }
+  for (let el of cardsPlayer) {
+    el.src = "";
+  }
+};
+
 const newGame = function () {
   bank = 1000;
   bet = 0;
@@ -123,13 +136,8 @@ const newGame = function () {
   btnStartGame.classList.remove("hidden");
   toggleBtnsBet("remove");
   toggleBtnsGame("add");
+  emptyField();
   resetPlayers();
-  for (let el of cardsDealer) {
-    el.src = "";
-  }
-  for (let el of cardsPlayer) {
-    el.src = "";
-  }
 };
 
 const checkWinner = function () {
@@ -222,14 +230,16 @@ const compareScores = function () {
   } else console.log("Draw!");
 };
 
-const emptyField = function () {
-  for (let i = 0; i < 9; i++) {
-    cardsDealer[i].src = "";
-    cardsPlayer[i].src = "";
-  }
-};
+//const emptyField = function () {
+//for (let i = 0; i < 9; i++) {
+//cardsDealer[i].src = "";
+//cardsPlayer[i].src = "";
+//}
+//};
 
-const turnCard = function () {};
+const turnCard = function () {
+  cardsDealer[0] = dealer.Hand[0].img;
+};
 
 const startGame = function () {
   if (bet > 0) {
@@ -274,11 +284,13 @@ btnDraw.addEventListener("click", () => {
   dealCard(player);
   addScoresInit();
   checkWinner();
+  btnDoubleDisable();
 });
 btnHold.addEventListener("click", () => {
   addScores();
+  btnDoubleDisable();
   if (dealerEle.textContent > 18) {
-    //turnOverCards
+    turnCard();
     compareScores();
   } else {
     dealCard(dealer);
@@ -316,4 +328,11 @@ btnBet100.addEventListener("click", function () {
 btnBet500.addEventListener("click", function () {
   addBet(500);
 });
+btnSurrender.addEventListener("click", function () {
+  bankEle.textContent =
+    Number(bankEle.textContent) + Number(betEle.textContent) / 2;
+  continueGame();
+});
 btnWinOrLose.addEventListener("click", continueGame);
+
+//cardsdelaer at 0 equals dealer hand at 0

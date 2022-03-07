@@ -255,6 +255,12 @@ main {
   top: 70%;
   width: 10%;
 }
+.cardfield-split {
+  position: absolute;
+  left: 15%;
+  top: 80%;
+  width: 8%;
+}
 
 .btn-start {
   bottom: 50%;
