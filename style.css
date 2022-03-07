@@ -348,7 +348,7 @@ main {
   left: 50%;
 }
 
-.winorlosesplit {
+.gameover {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -363,6 +363,18 @@ main {
   z-index: 10;
   filter: blur();
 }
+
+.gameoverele {
+  position: absolute;
+  left: 35%;
+  top: 45%;
+}
+
+.btngameover {
+  top: 65%;
+  left: 50%;
+}
+
 .hidden {
   display: none !important;
 }
