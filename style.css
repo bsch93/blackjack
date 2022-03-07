@@ -255,7 +255,7 @@ main {
   top: 70%;
   width: 10%;
 }
-.cardfield-split {
+.cardfield-player9 {
   position: absolute;
   left: 15%;
   top: 80%;
@@ -348,6 +348,21 @@ main {
   left: 50%;
 }
 
+.winorlosesplit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 28%;
+  width: 70%;
+
+  background-color: rgba(255, 255, 255, 0.644);
+  padding: 6rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  filter: blur();
+}
 .hidden {
   display: none !important;
 }

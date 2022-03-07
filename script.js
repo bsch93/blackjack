@@ -18,6 +18,7 @@ const btnDraw = document.querySelector(".btn-draw");
 const btnHold = document.querySelector(".btn-hold");
 const btnSurrender = document.querySelector(".btn-surrender");
 const btnDouble = document.querySelector(".btn-double");
+const btnSplit = document.querySelector(".btn-split");
 const winOrLoseModal = document.querySelector(".winorlose");
 const winOrLoseEle = document.querySelector(".winorloseele");
 const btnWinOrLose = document.querySelector(".btnwinorlose");
@@ -25,7 +26,7 @@ const btnWinOrLose = document.querySelector(".btnwinorlose");
 let cardsDealer = document.getElementById("cards-dealer").querySelectorAll("img");
 // prettier-ignore
 let cardsPlayer = document.getElementById("cards-player").querySelectorAll("img");
-
+//let cardsSplit = document.querySelector(".cardfield-split");
 // Erstellt das Deck aus 52 Karten
 
 const farbe = ["Kreuz", "Pik", "Herz", "Karo"];
@@ -79,7 +80,9 @@ let player = {
   Score: 0,
   Hand: [],
 };
-
+let split = {
+  Hand: [],
+};
 // funktionen
 
 const resetPlayers = function () {
@@ -91,6 +94,9 @@ const resetPlayers = function () {
   player = {
     ID: 1,
     Score: 0,
+    Hand: [],
+  };
+  let split = {
     Hand: [],
   };
   dealerEle.textContent = 0;
@@ -152,9 +158,28 @@ const checkWinner = function () {
   }
   if (winner) {
     toggleBtnsGame("add");
+    turnCard();
     winOrLoseModal.classList.remove("hidden");
     winOrLoseEle.textContent = `${winnerID} gewinnt!`;
   }
+};
+
+const checkWinnerDouble = function () {
+  if (dealerEle.textContent == 21 || playerEle.textContent > 21) {
+    console.log("Dealer won!");
+    winner = true;
+    winnerID = "Dealer";
+  }
+  if (winner) {
+    toggleBtnsGame("add");
+    winOrLoseModal.classList.remove("hidden");
+    winOrLoseEle.textContent = `${winnerID} gewinnt!`;
+  }
+};
+
+const dealerTurnDouble = function () {
+  addScores();
+  //if (dealerEle.textContent !== 21 || playerEle.textContent !> 21)
 };
 
 const addBet = function (betted) {
@@ -179,6 +204,23 @@ const displayCards = function () {
   }
 };
 
+const displayCardsSplit = function () {
+  for (let i = 0; i < dealer.Hand.length; i++) {
+    if (dealer.Hand.length == 2 && i == 0) {
+      cardsDealer[i].src = `./Karten/Kartenrücken.png`;
+    } else {
+      cardsDealer[i].src = `./Karten/${dealer.Hand[i].img}`;
+    }
+  }
+  for (let i = 0; i < player.Hand.length; i++) {
+    cardsPlayer[i].src = `./Karten/${player.Hand[i].img}`;
+  }
+  cardsPlayer[1].src = "";
+  for (let i = 8; i < split.Hand.length + 8; i++) {
+    cardsPlayer[i].src = `./Karten/${split.Hand[i - 8].img}`;
+  }
+};
+
 const dealHands = function () {
   for (let i = 0; i < 2; i++) {
     let card = deck.pop();
@@ -193,6 +235,14 @@ const dealCard = function (id) {
   let card = deck.pop();
   id.Hand.push(card);
   displayCards();
+};
+
+const splitHand = function () {
+  split.Hand[0] = player.Hand.shift();
+};
+
+const splitBtnToggle = function (toggle) {
+  btnSplit.classList[toggle]("hidden");
 };
 
 const addScoresInit = function () {
@@ -238,7 +288,15 @@ const compareScores = function () {
 //};
 
 const turnCard = function () {
-  cardsDealer[0] = dealer.Hand[0].img;
+  cardsDealer[0].src = `./Karten/${dealer.Hand[0].img}`;
+};
+
+const checkSplit = function () {
+  let temp1 = player.Hand[0].Nummer;
+  let temp2 = player.Hand[1].Nummer;
+  if (temp1 === temp2) {
+    splitBtnToggle("remove");
+  }
 };
 
 const startGame = function () {
@@ -246,9 +304,11 @@ const startGame = function () {
     toggleBtnsBet("add");
     toggleBtnsGame("remove");
     btnStartGame.classList.add("hidden");
+    splitBtnToggle("remove");
     dealHands();
     displayCards();
     addScoresInit();
+    checkSplit();
     checkWinner();
   }
 };
@@ -285,6 +345,7 @@ btnDraw.addEventListener("click", () => {
   addScoresInit();
   checkWinner();
   btnDoubleDisable();
+  if (winner) addScores();
 });
 btnHold.addEventListener("click", () => {
   addScores();
@@ -302,13 +363,10 @@ btnDouble.addEventListener("click", () => {
   bankEle.textContent = bankEle.textContent - betEle.textContent;
   betEle.textContent = betEle.textContent * 2;
   btnDouble.classList.add("hidden");
+  dealCard(player);
   addScores();
-  checkWinner();
-  if (!winner) {
-    dealCard(player);
-    addScores();
-    checkWinner();
-  }
+  turnCard();
+  checkWinnerDouble();
 });
 btnBet1.addEventListener("click", function () {
   addBet(1);
@@ -333,6 +391,23 @@ btnSurrender.addEventListener("click", function () {
     Number(bankEle.textContent) + Number(betEle.textContent) / 2;
   continueGame();
 });
+btnSplit.addEventListener("click", function () {
+  splitBtnToggle("add");
+  splitHand();
+  displayCardsSplit();
+  dealCard(player);
+  addScores();
+});
 btnWinOrLose.addEventListener("click", continueGame);
 
 //cardsdelaer at 0 equals dealer hand at 0
+
+//if (!winner) {
+//dealCard(player);
+//addScoresInit();
+//checkWinner();
+//if (!winner) {
+//dealCard(player);
+//addScoresInit();
+//checkWinner();
+//}
